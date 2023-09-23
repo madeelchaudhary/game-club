@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
+import { Genre } from "./useGenres";
+import useHttp from "./useHttp";
 
 export interface Platform {
   platform: {
@@ -21,36 +21,15 @@ export interface Game {
   metacritic: number;
 }
 
-interface GameAPIResponse {
-  results: Game[];
-  count: number;
-}
-
-const useGames = () => {
-  const [games, setGames] = useState<Game[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    setLoading(true);
-    const controller = new AbortController();
-    const signal = controller.signal;
-    apiClient
-      .get<GameAPIResponse>("/games", { signal })
-      .then((response) => {
-        setGames(response.data.results);
-      })
-      .catch((error) => {
-        setError(error.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-
-    return () => controller.abort();
-  }, []);
-
-  return { games, loading, error };
-};
+const useGames = (genre: Genre | null) =>
+  useHttp<Game>(
+    "games",
+    {
+      params: {
+        genres: genre?.slug,
+      },
+    },
+    [genre]
+  );
 
 export default useGames;
