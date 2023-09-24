@@ -15,7 +15,7 @@ const Game = ({ game }: Props) => {
 
   return (
     <GameContainer>
-      <Card>
+      <Card h="full">
         <Image src={getOptimizedImageUrl(background_image)} alt={name} />
         <CardBody>
           <Heading as="h3" size="md" fontSize={"2xl"} mb={"1.5"}>

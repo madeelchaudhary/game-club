@@ -6,7 +6,7 @@ interface Props {
 
 const GameContainer = ({ children }: Props) => {
   return (
-    <Box w="full" rounded={"xl"} overflow={"hidden"}>
+    <Box w="full" rounded={"xl"} overflow={"hidden"} shadow="sm">
       {children}
     </Box>
   );

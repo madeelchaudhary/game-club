@@ -9,7 +9,7 @@ import { SiNintendo } from "react-icons/si";
 import { MdPhoneIphone } from "react-icons/md";
 import { BsGlobe } from "react-icons/bs";
 import { Platform } from "../hooks/useGames";
-import { HStack, Icon } from "@chakra-ui/react";
+import { Box, HStack, Icon } from "@chakra-ui/react";
 
 const ICON_MAP = {
   pc: FaWindows,
@@ -33,7 +33,11 @@ function PlatformIconList({ platforms }: Props) {
       {platforms.map(({ platform }) => {
         const icon = ICON_MAP[platform.slug as keyof typeof ICON_MAP];
 
-        return <Icon as={icon} key={platform.id} color={"gray.500"} />;
+        return (
+          <Box title={platform.name} key={platform.id}>
+            <Icon as={icon} color={"gray.500"} />
+          </Box>
+        );
       })}
     </HStack>
   );
