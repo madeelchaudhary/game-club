@@ -3,13 +3,19 @@ import { HStack, Image, useColorModeValue } from "@chakra-ui/react";
 import logo from "../assets/logo.png";
 import logoDark from "../assets/logo-dark.png";
 import ColorModeSwitch from "./ColorModeSwitch";
+import SearchInput from "./SearchInput";
 
-const Header = () => {
+interface Props {
+  onSearch: (query: string) => void;
+}
+
+const Header = ({ onSearch }: Props) => {
   const image = useColorModeValue(logo, logoDark);
 
   return (
-    <HStack p="4">
-      <Image maxH={"45px"} src={image} alt="logo" />
+    <HStack py={6}>
+      <Image maxH={10} src={image} alt="logo" />
+      <SearchInput onSearch={onSearch} />
       <ColorModeSwitch />
     </HStack>
   );

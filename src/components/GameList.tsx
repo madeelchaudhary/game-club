@@ -16,7 +16,7 @@ const GameList = ({ query }: Props) => {
   return (
     <>
       {error && <div>{error}</div>}
-      <SimpleGrid p="4" columns={{ base: 1, md: 2, lg: 3 }} spacing={4}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={4}>
         {loading && (
           <>
             {skeletons.map((_, index) => (

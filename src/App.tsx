@@ -13,6 +13,7 @@ export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
   sort: Sort | null;
+  search?: string;
 }
 
 function App() {
@@ -33,13 +34,15 @@ function App() {
         lg: `"header header" "aside main"`,
       }}
       templateColumns={{ base: "1fr  ", lg: "auto 1fr" }}
-      columnGap={4}
+      columnGap={5}
+      px={5}
+      pb={6}
     >
       <GridItem gridArea="header">
-        <Header />
+        <Header onSearch={(query) => setQuery({ search: query })} />
       </GridItem>
       <GridItem gridArea="main">
-        <HStack>
+        <HStack mb={5} gap={3} alignItems="stretch">
           <PlatformSelector
             selected={gameQuery.platform}
             onSelect={(platform) => setQuery({ platform })}
@@ -52,7 +55,7 @@ function App() {
         <GameList query={gameQuery} />
       </GridItem>
 
-      <GridItem hideBelow="lg" gridArea="aside" px={4} w="56">
+      <GridItem hideBelow="lg" gridArea="aside" w="56">
         <GenreList
           selected={gameQuery.genre}
           onSelect={(genre) => setQuery({ genre })}
