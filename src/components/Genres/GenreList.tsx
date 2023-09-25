@@ -6,9 +6,10 @@ import {
   List,
   ListItem,
 } from "@chakra-ui/react";
+
 import useGenres, { Genre } from "../../hooks/useGenres";
 import getOptimizedImageUrl from "../../services/image-url";
-import GenreListSkeleton from "./GenreListSkeleton";
+import genres from "../../constants/genres";
 
 interface Props {
   onSelect: (genre: Genre) => void;
@@ -16,9 +17,9 @@ interface Props {
 }
 
 const GenreList = ({ onSelect, selected }: Props) => {
-  const { data, error, loading } = useGenres();
+  const { data } = useGenres();
 
-  if (loading) return <GenreListSkeleton />;
+  const items = data && data.length > 0 ? data : genres;
 
   return (
     <>
@@ -26,8 +27,7 @@ const GenreList = ({ onSelect, selected }: Props) => {
         Genres
       </Heading>
       <List>
-        {error && <div>{error}</div>}
-        {data.map((genre) => (
+        {items.map((genre) => (
           <ListItem key={genre.id} py="1.5">
             <HStack>
               <Image
@@ -38,7 +38,7 @@ const GenreList = ({ onSelect, selected }: Props) => {
                 alt={genre.name}
               />
               <Button
-                onClick={() => onSelect(genre)}
+                onClick={() => selected?.id != genre.id && onSelect(genre)}
                 variant="link"
                 fontSize="md"
                 fontWeight={selected?.id === genre.id ? "bold" : "normal"}

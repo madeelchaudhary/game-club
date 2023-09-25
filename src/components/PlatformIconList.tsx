@@ -31,6 +31,7 @@ function PlatformIconList({ platforms }: Props) {
   return (
     <HStack spacing={2}>
       {platforms.map(({ platform }) => {
+        if (platform.slug in ICON_MAP === false) return null;
         const icon = ICON_MAP[platform.slug as keyof typeof ICON_MAP];
 
         return (
