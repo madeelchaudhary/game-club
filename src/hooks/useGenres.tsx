@@ -1,4 +1,6 @@
-import useHttp from "./useHttp";
+import genres from "../data/genres";
+import apiClient, { AxiosError } from "../services/api-client";
+import { useQuery } from "@tanstack/react-query";
 
 export interface Genre {
   id: number;
@@ -8,6 +10,14 @@ export interface Genre {
   image_background: string;
 }
 
-const useGenres = () => useHttp<Genre>("genres");
+const useGenres = () =>
+  useQuery<Genre[], AxiosError>(
+    ["genres"],
+    () => apiClient.get("genres").then((response) => response.data.results),
+    {
+      staleTime: 24 * 60 * 60 * 1000, // 24 hours
+      initialData: genres,
+    }
+  );
 
 export default useGenres;

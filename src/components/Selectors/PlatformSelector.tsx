@@ -10,16 +10,16 @@ interface Props {
 }
 
 const PlatformSelector = ({ onSelect, selected }: Props) => {
-  const { data, error, loading } = usePlatforms();
+  const { data, error, isLoading } = usePlatforms();
 
-  if (loading) return <Skeleton h="10" w="32" rounded="md" />;
+  if (isLoading) return <Skeleton h="10" w="32" rounded="md" />;
 
   if (error) return;
 
   return (
     <Selector
       label="Platforms"
-      items={data}
+      items={data || []}
       onSelect={onSelect}
       selected={selected}
     />

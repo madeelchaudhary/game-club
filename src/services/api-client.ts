@@ -1,4 +1,9 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+
+export interface APIResponse<T> {
+  count: number;
+  results: T[];
+}
 
 const apiClient = axios.create({
   baseURL: "https://api.rawg.io/api/",
@@ -8,3 +13,4 @@ const apiClient = axios.create({
 });
 
 export default apiClient;
+export { AxiosError };

@@ -1,5 +1,6 @@
-import useHttp from "./useHttp";
 import { GameQuery } from "../App";
+import { useQuery } from "@tanstack/react-query";
+import apiClient, { AxiosError } from "../services/api-client";
 
 export interface Platform {
   platform: {
@@ -22,17 +23,24 @@ export interface Game {
 }
 
 const useGames = (query: GameQuery) =>
-  useHttp<Game>(
-    "games",
-    {
-      params: {
+  useQuery<Game[], AxiosError, Game[], [string, GameQuery]>(
+    ["games", query],
+    async ({ queryKey }) => {
+      const [, query] = queryKey;
+      const params = {
         genres: query.genre?.id,
         parent_platforms: query.platform?.id,
         ordering: query.sort?.slug,
         search: query.search,
-      },
+      };
+
+      const res = await apiClient.get("games", { params });
+      return res.data.results;
     },
-    [query]
+    {
+      staleTime: 1000 * 60, // 1 minute
+      refetchOnWindowFocus: false,
+    }
   );
 
 export default useGames;

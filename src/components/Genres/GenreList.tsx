@@ -9,7 +9,6 @@ import {
 
 import useGenres, { Genre } from "../../hooks/useGenres";
 import getOptimizedImageUrl from "../../services/image-url";
-import genres from "../../constants/genres";
 
 interface Props {
   onSelect: (genre: Genre) => void;
@@ -19,15 +18,13 @@ interface Props {
 const GenreList = ({ onSelect, selected }: Props) => {
   const { data } = useGenres();
 
-  const items = data && data.length > 0 ? data : genres;
-
   return (
     <>
       <Heading fontSize="2xl" mb={3}>
         Genres
       </Heading>
       <List>
-        {items.map((genre) => (
+        {data?.map((genre) => (
           <ListItem key={genre.id} py="1.5">
             <HStack>
               <Image
