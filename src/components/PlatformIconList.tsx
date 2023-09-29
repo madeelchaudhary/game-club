@@ -8,8 +8,10 @@ import {
 import { SiNintendo } from "react-icons/si";
 import { MdPhoneIphone } from "react-icons/md";
 import { BsGlobe } from "react-icons/bs";
-import { Platform } from "../hooks/useGames";
+import { Game } from "../hooks/useGames";
 import { Box, HStack, Icon } from "@chakra-ui/react";
+
+type Platform = Game["parent_platforms"][number];
 
 const ICON_MAP = {
   pc: FaWindows,
