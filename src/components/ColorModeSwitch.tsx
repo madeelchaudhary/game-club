@@ -10,7 +10,7 @@ const ColorModeSwitch = () => {
         isChecked={colorMode === "dark"}
         onChange={toggleColorMode}
       />
-      <Text w="max">
+      <Text fontSize={{ base: "sm", md: "md" }} w="max">
         {colorMode[0].toUpperCase() + colorMode.slice(1)} Mode
       </Text>
     </HStack>

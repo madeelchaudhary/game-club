@@ -23,11 +23,6 @@ class APIClient {
     });
     return response.data;
   };
-
-  getById = async <T>(id: string | number) => {
-    const response = await apiClient.get<T>(`${this.endpoint}/${id}`);
-    return response.data;
-  };
 }
 
 export const gamesService = new APIClient("games");

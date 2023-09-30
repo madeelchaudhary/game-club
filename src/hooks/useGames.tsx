@@ -1,5 +1,7 @@
-import { GameQuery } from "../App";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import ms from "ms";
+
+import { GameQuery } from "../App";
 import { gamesService, AxiosError, APIResponse } from "../services/api-client";
 import { Platform } from "./usePlatforms";
 
@@ -25,9 +27,9 @@ const useGames = (query: GameQuery) =>
     async ({ queryKey, pageParam }) => {
       const [, query] = queryKey;
       const params = {
-        genres: query.genre?.id,
-        parent_platforms: query.platform?.id,
-        ordering: query.sort?.slug,
+        genres: query.genreId,
+        parent_platforms: query.platformId,
+        ordering: query.sort,
         search: query.search,
         page: pageParam || 1,
       };
@@ -36,7 +38,7 @@ const useGames = (query: GameQuery) =>
       return data;
     },
     {
-      staleTime: 1000 * 60, // 1 minute
+      staleTime: ms("1h"),
       refetchOnWindowFocus: false,
       getNextPageParam: (lastPage) => {
         if (lastPage.next) {

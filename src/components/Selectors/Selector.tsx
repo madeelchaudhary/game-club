@@ -4,12 +4,12 @@ import { BsChevronDown } from "react-icons/bs";
 interface Base {
   id: number;
   name: string;
-  slug: string | null;
+  slug?: string;
 }
 
 interface Props<T> {
   onSelect: (item: T) => void;
-  selected: T | null;
+  selected?: T;
   items: T[];
   label: string;
   prefix?: string;
@@ -24,15 +24,17 @@ const Selector = <T extends Base>({
 }: Props<T>) => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+      <MenuButton
+        size={{ base: "sm", md: "md" }}
+        as={Button}
+        rightIcon={<BsChevronDown />}
+      >
         {prefix} {selected?.name || label}
       </MenuButton>
       <MenuList>
         {items.map((item) => (
           <MenuItem
-            onClick={() =>
-              selected?.slug != item.slug ? onSelect(item) : null
-            }
+            onClick={() => (selected?.id != item.id ? onSelect(item) : null)}
             key={item.id}
           >
             {item.name}

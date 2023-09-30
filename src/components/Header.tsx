@@ -14,7 +14,7 @@ const Header = ({ onSearch }: Props) => {
 
   return (
     <HStack py={6}>
-      <Image maxH={10} src={image} alt="logo" />
+      <Image maxH={{ md: 10, base: 6 }} src={image} alt="logo" />
       <SearchInput onSearch={onSearch} />
       <ColorModeSwitch />
     </HStack>

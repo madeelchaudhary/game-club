@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { platformsService } from "../services/api-client";
+import ms from "ms";
 
 export interface Platform {
   id: number;
@@ -12,7 +13,7 @@ const usePlatforms = () =>
     ["platforms", "parensts"],
     () => platformsService.get<Platform>().then((data) => data.results),
     {
-      staleTime: 24 * 60 * 60 * 1000, // 24 hours
+      staleTime: ms("24h"),
     }
   );
 

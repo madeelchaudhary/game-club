@@ -11,12 +11,16 @@ import useGenres, { Genre } from "../../hooks/useGenres";
 import getOptimizedImageUrl from "../../services/image-url";
 
 interface Props {
-  onSelect: (genre: Genre) => void;
-  selected: Genre | null;
+  onSelect: (genreId: number) => void;
+  selected?: number;
 }
 
 const GenreList = ({ onSelect, selected }: Props) => {
   const { data } = useGenres();
+
+  const handleSelect = (genre: Genre) => {
+    onSelect(genre.id);
+  };
 
   return (
     <>
@@ -35,10 +39,10 @@ const GenreList = ({ onSelect, selected }: Props) => {
                 alt={genre.name}
               />
               <Button
-                onClick={() => selected?.id != genre.id && onSelect(genre)}
+                onClick={() => selected != genre.id && handleSelect(genre)}
                 variant="link"
                 fontSize="md"
-                fontWeight={selected?.id === genre.id ? "bold" : "normal"}
+                fontWeight={selected === genre.id ? "bold" : "normal"}
               >
                 {genre.name}
               </Button>
