@@ -1,5 +1,4 @@
 import { Grid, GridItem, HStack } from "@chakra-ui/react";
-import { useState } from "react";
 
 import GameHeading from "./components/GameHeading";
 import GameList from "./components/GameList";
@@ -8,20 +7,7 @@ import Header from "./components/Header";
 import PlatformSelector from "./components/Selectors/PlatformSelector";
 import SortSelector from "./components/Selectors/SortSelector";
 
-export interface GameQuery {
-  genreId?: number;
-  platformId?: number;
-  sort?: string;
-  search?: string;
-}
-
 function App() {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({});
-
-  function setQuery(query: Partial<GameQuery>) {
-    setGameQuery((prev) => ({ ...prev, ...query }));
-  }
-
   return (
     <Grid
       templateAreas={{
@@ -36,28 +22,19 @@ function App() {
       m="auto"
     >
       <GridItem gridArea="header">
-        <Header onSearch={(query) => setQuery({ search: query })} />
+        <Header />
       </GridItem>
       <GridItem gridArea="main">
-        <GameHeading gameQuery={gameQuery} />
+        <GameHeading />
         <HStack mb={5} gap={3} alignItems="stretch">
-          <PlatformSelector
-            selected={gameQuery.platformId}
-            onSelect={(platformId) => setQuery({ platformId })}
-          />
-          <SortSelector
-            selected={gameQuery.sort}
-            onSelect={(sort) => setQuery({ sort })}
-          />
+          <PlatformSelector />
+          <SortSelector />
         </HStack>
-        <GameList query={gameQuery} />
+        <GameList />
       </GridItem>
 
       <GridItem hideBelow="lg" gridArea="aside" w="52">
-        <GenreList
-          selected={gameQuery.genreId}
-          onSelect={(genreId) => setQuery({ genreId })}
-        />
+        <GenreList />
       </GridItem>
     </Grid>
   );

@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ms from "ms";
 
-import { GameQuery } from "../App";
-import { gamesService, AxiosError, APIResponse } from "../services/api-client";
+import { APIResponse, AxiosError, gamesService } from "../services/api-client";
+import useGamesQuery from "../store/gameQuery";
 import { Platform } from "./usePlatforms";
 
 export interface Game {
@@ -16,12 +16,13 @@ export interface Game {
   metacritic: number;
 }
 
-const useGames = (query: GameQuery) =>
-  useInfiniteQuery<
+const useGames = () => {
+  const query = useGamesQuery((s) => s.query);
+  return useInfiniteQuery<
     APIResponse<Game>,
     AxiosError,
     APIResponse<Game>,
-    [string, GameQuery]
+    [string, typeof query]
   >(
     ["games", query],
     async ({ queryKey, pageParam }) => {
@@ -50,5 +51,6 @@ const useGames = (query: GameQuery) =>
       },
     }
   );
+};
 
 export default useGames;

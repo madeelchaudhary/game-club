@@ -4,12 +4,10 @@ import logo from "../assets/logo.png";
 import logoDark from "../assets/logo-dark.png";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
+import useGameQuery from "../store/gameQuery";
 
-interface Props {
-  onSearch: (query: string) => void;
-}
-
-const Header = ({ onSearch }: Props) => {
+const Header = () => {
+  const onSearch = useGameQuery((s) => s.setSearch);
   const image = useColorModeValue(logo, logoDark);
 
   return (

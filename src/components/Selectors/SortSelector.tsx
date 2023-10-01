@@ -1,3 +1,4 @@
+import useGameQuery from "../../store/gameQuery";
 import Selector from "./Selector";
 
 const SORTS = [
@@ -11,14 +12,10 @@ const SORTS = [
 
 export type Sort = (typeof SORTS)[number]["slug"];
 
-interface Props {
-  onSelect: (item: Sort) => void;
-  selected?: Sort;
-}
-
-const SortSelector = ({ onSelect, selected }: Props) => {
+const SortSelector = () => {
+  const [selected, setSort] = useGameQuery((s) => [s.query.sort, s.setSort]);
   const handleSelect = (item: (typeof SORTS)[number]) => {
-    onSelect(item.slug);
+    setSort(item.slug);
   };
 
   const selectedSort = SORTS.find((sort) => sort.slug === selected);

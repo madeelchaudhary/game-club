@@ -1,16 +1,15 @@
 import { Skeleton } from "@chakra-ui/react";
 
-import usePlatforms from "../../hooks/usePlatforms";
-import { Platform } from "../../hooks/usePlatforms";
-import Selector from "./Selector";
 import usePlatform from "../../hooks/usePlatform";
+import usePlatforms, { Platform } from "../../hooks/usePlatforms";
+import useGameQuery from "../../store/gameQuery";
+import Selector from "./Selector";
 
-interface Props {
-  onSelect: (platformId: number) => void;
-  selected?: number;
-}
-
-const PlatformSelector = ({ onSelect, selected }: Props) => {
+const PlatformSelector = () => {
+  const [selected, setPlatformId] = useGameQuery((s) => [
+    s.query.platformId,
+    s.setPlatformId,
+  ]);
   const { data, error, isLoading } = usePlatforms();
   const platform = usePlatform(selected);
 
@@ -21,7 +20,7 @@ const PlatformSelector = ({ onSelect, selected }: Props) => {
   const handleSelect = (platform: Platform) => {
     const platformId = platform.id;
 
-    onSelect(platformId);
+    setPlatformId(platformId);
   };
 
   return (

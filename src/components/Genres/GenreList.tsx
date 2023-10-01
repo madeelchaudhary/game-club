@@ -9,17 +9,17 @@ import {
 
 import useGenres, { Genre } from "../../hooks/useGenres";
 import getOptimizedImageUrl from "../../services/image-url";
+import useGameQuery from "../../store/gameQuery";
 
-interface Props {
-  onSelect: (genreId: number) => void;
-  selected?: number;
-}
-
-const GenreList = ({ onSelect, selected }: Props) => {
+const GenreList = () => {
+  const [selected, setGenreId] = useGameQuery((s) => [
+    s.query.genreId,
+    s.setGenreId,
+  ]);
   const { data } = useGenres();
 
   const handleSelect = (genre: Genre) => {
-    onSelect(genre.id);
+    setGenreId(genre.id);
   };
 
   return (

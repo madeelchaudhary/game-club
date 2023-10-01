@@ -1,18 +1,13 @@
+import React from "react";
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { GameQuery } from "../App";
 import useGames from "../hooks/useGames";
 import Game from "./Game";
 import GameSkeleton from "./GameSkeleton";
 
-interface Props {
-  query: GameQuery;
-}
-
-const GameList = ({ query }: Props) => {
-  const { data, error, isLoading, fetchNextPage, hasNextPage } =
-    useGames(query);
+const GameList = () => {
+  const { data, error, isLoading, fetchNextPage, hasNextPage } = useGames();
 
   const skeletons = Array.from({ length: 6 });
 
@@ -50,11 +45,11 @@ const GameList = ({ query }: Props) => {
           <Text color="gray.400">No games found</Text>
         )}
         {data?.pages.map((page) => (
-          <>
+          <React.Fragment key={page.next}>
             {page.results.map((game) => (
               <Game key={game.id} game={game} />
             ))}
-          </>
+          </React.Fragment>
         ))}
       </SimpleGrid>
     </InfiniteScroll>
