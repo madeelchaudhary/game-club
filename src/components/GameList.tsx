@@ -3,7 +3,7 @@ import { SimpleGrid, Text } from "@chakra-ui/react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import useGames from "../hooks/useGames";
-import Game from "./Game";
+import GameCard from "./GameCard";
 import GameSkeleton from "./GameSkeleton";
 
 const GameList = () => {
@@ -18,6 +18,7 @@ const GameList = () => {
 
   return (
     <InfiniteScroll
+      style={{ overflow: "initial" }}
       next={fetchNextPage}
       hasMore={hasNextPage || false}
       loader={
@@ -47,7 +48,7 @@ const GameList = () => {
         {data?.pages.map((page) => (
           <React.Fragment key={page.next}>
             {page.results.map((game) => (
-              <Game key={game.id} game={game} />
+              <GameCard key={game.id} game={game} />
             ))}
           </React.Fragment>
         ))}

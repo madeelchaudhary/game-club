@@ -1,15 +1,14 @@
+import { Box, HStack, Icon } from "@chakra-ui/react";
+import { BsGlobe } from "react-icons/bs";
 import {
-  FaWindows,
   FaApple,
   FaLinux,
   FaPlaystation,
+  FaWindows,
   FaXbox,
 } from "react-icons/fa";
-import { SiNintendo } from "react-icons/si";
 import { MdPhoneIphone } from "react-icons/md";
-import { BsGlobe } from "react-icons/bs";
-import { Game } from "../hooks/useGames";
-import { Box, HStack, Icon } from "@chakra-ui/react";
+import { SiNintendo } from "react-icons/si";
 
 type Platform = Game["parent_platforms"][number];
 

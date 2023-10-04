@@ -7,7 +7,7 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 
-import useGenres, { Genre } from "../../hooks/useGenres";
+import useGenres from "../../hooks/useGenres";
 import getOptimizedImageUrl from "../../services/image-url";
 import useGameQuery from "../../store/gameQuery";
 

@@ -1,17 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { platformsService } from "../services/api-client";
 import ms from "ms";
 
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
+import { platformsService } from "../services/api-client";
 
 const usePlatforms = () =>
   useQuery<Platform[]>(
     ["platforms", "parensts"],
-    () => platformsService.get<Platform>().then((data) => data.results),
+    () => platformsService.getAll<Platform>().then((data) => data.results),
     {
       staleTime: ms("24h"),
     }

@@ -17,10 +17,15 @@ const apiClient = axios.create({
 class APIClient {
   constructor(private endpoint: string) {}
 
-  get = async <T>(params?: object) => {
+  getAll = async <T>(params?: object) => {
     const response = await apiClient.get<APIResponse<T>>(this.endpoint, {
       params,
     });
+    return response.data;
+  };
+
+  get = async <T>(id: string) => {
+    const response = await apiClient.get<T>(`${this.endpoint}/${id}`);
     return response.data;
   };
 }
@@ -28,4 +33,5 @@ class APIClient {
 export const gamesService = new APIClient("games");
 export const genresService = new APIClient("genres");
 export const platformsService = new APIClient("platforms");
+export const gameService = new APIClient("games");
 export { AxiosError };

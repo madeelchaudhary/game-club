@@ -3,18 +3,6 @@ import ms from "ms";
 
 import { APIResponse, AxiosError, gamesService } from "../services/api-client";
 import useGamesQuery from "../store/gameQuery";
-import { Platform } from "./usePlatforms";
-
-export interface Game {
-  id: number;
-  name: string;
-  released: string;
-  background_image: string;
-  rating: number;
-  rating_top: number;
-  parent_platforms: { platform: Platform }[];
-  metacritic: number;
-}
 
 const useGames = () => {
   const query = useGamesQuery((s) => s.query);
@@ -35,7 +23,7 @@ const useGames = () => {
         page: pageParam || 1,
       };
 
-      const data = await gamesService.get<Game>(params);
+      const data = await gamesService.getAll<Game>(params);
       return data;
     },
     {

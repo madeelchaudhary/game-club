@@ -1,7 +1,7 @@
 import { Skeleton } from "@chakra-ui/react";
 
 import usePlatform from "../../hooks/usePlatform";
-import usePlatforms, { Platform } from "../../hooks/usePlatforms";
+import usePlatforms from "../../hooks/usePlatforms";
 import useGameQuery from "../../store/gameQuery";
 import Selector from "./Selector";
 
