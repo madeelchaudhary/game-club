@@ -1,9 +1,11 @@
-import { Box, Heading, Spinner } from "@chakra-ui/react";
+import { Box, Grid, Heading, Spinner, VStack } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 import useGame from "../hooks/useGame";
 import ExpandableText from "../components/ExpandableText";
 import GameAttributes from "../components/GameAttributes";
+import GameTrailer from "../components/GameTrailer";
+import GameShots from "../components/GameShots";
 
 const GameDetailPage = () => {
   const params = useParams();
@@ -14,15 +16,29 @@ const GameDetailPage = () => {
   if (error || !data) throw error;
 
   return (
-    <>
-      <Heading as="h1" size="lg">
-        {data.name}
-      </Heading>
-      <ExpandableText text={data.description_raw} />
-      <Box mt={6}>
+    <Grid
+      templateColumns={{ base: "1fr", md: "1fr 1fr" }}
+      gap={6}
+      px={{ base: 4, sm: 5 }}
+      py={8}
+      maxW="1560"
+      m="auto"
+    >
+      <VStack align={"stretch"} gap={7}>
+        <Box>
+          <Heading mb={2} as="h1">
+            {data.name}
+          </Heading>
+          <ExpandableText text={data.description_raw} />
+        </Box>
         <GameAttributes game={data} />
-      </Box>
-    </>
+      </VStack>
+
+      <VStack align={"stretch"} gap={7}>
+        <GameTrailer gameId={data.slug} />
+        <GameShots gameId={data.slug} />
+      </VStack>
+    </Grid>
   );
 };
 
