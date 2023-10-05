@@ -1,7 +1,7 @@
 import { Grid, GridItem, HStack } from "@chakra-ui/react";
 
-import GameHeading from "../components/GameHeading";
-import GameList from "../components/GameList";
+import GameHeading from "../components/Games/GameHeading";
+import GameList from "../components/Games/List/GameList";
 import GenreList from "../components/Genres/GenreList";
 import PlatformSelector from "../components/Selectors/PlatformSelector";
 import SortSelector from "../components/Selectors/SortSelector";

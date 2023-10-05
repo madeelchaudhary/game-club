@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 
 import useGame from "../hooks/useGame";
 import ExpandableText from "../components/ExpandableText";
-import GameAttributes from "../components/GameAttributes";
-import GameTrailer from "../components/GameTrailer";
-import GameShots from "../components/GameShots";
+import GameAttributes from "../components/Games/Detail/GameAttributes";
+import GameTrailer from "../components/Games/Detail/GameTrailer";
+import GameShots from "../components/Games/Detail/GameShots";
 
 const GameDetailPage = () => {
   const params = useParams();

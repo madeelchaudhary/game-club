@@ -1,6 +1,6 @@
-import bullseye from "../assets/bullseye.png";
-import thumbsUp from "../assets/thumbs.png";
-import meh from "../assets/meh.png";
+import bullseye from "../../assets/bullseye.png";
+import thumbsUp from "../../assets/thumbs.png";
+import meh from "../../assets/meh.png";
 import { Image, ImageProps } from "@chakra-ui/react";
 
 const EMOJI_MAP: Record<number, ImageProps> = {
